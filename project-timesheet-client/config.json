@@ -1,0 +1,6 @@
+{
+"/ots":{
+"target" : "http://www.onetimesheet.com:8080",
+"secure" : false
+}
+}

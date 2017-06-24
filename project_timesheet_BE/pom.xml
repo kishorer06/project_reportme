@@ -6,7 +6,7 @@
 	<groupId>com.timesheet</groupId>
 	<artifactId>timeheet-beta</artifactId>
 	<version>1.0.0-SNAPSHOT</version>
-	<packaging>jar</packaging>
+	<packaging>war</packaging>
 
 	<name>Timesheet-Beta-v1.0</name>
 	<description>Timesheet project is still in experimental stage and we are launching soon with new features</description>
@@ -43,6 +43,25 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
+			
+			<plugin>
+<artifactId>maven-resources-plugin</artifactId>
+<executions>
+      <execution>
+          <id>copy-resources</id>
+          <phase>validate</phase>
+          <goals><goal>copy-resources</goal></goals>
+          <configuration>
+              <outputDirectory>${basedir}/target/classes/static/</outputDirectory>
+              <resources>
+                  <resource>
+                      <directory>${basedir}/../ demo-app-client/dist</directory>
+                  </resource>
+              </resources>
+          </configuration>
+      </execution>
+</executions>
+</plugin>
 		</plugins>
 	</build>
 
