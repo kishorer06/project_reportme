@@ -1,5 +1,7 @@
 target/
 !.mvn/wrapper/maven-wrapper.jar
+bin/
+project_timesheet_BE/bin/
 
 ### STS ###
 .apt_generated
