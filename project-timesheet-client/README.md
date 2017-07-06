@@ -4,7 +4,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 ## Instructions
 
-Please install `npm install -g @angular/cli` and then run `npm start` and go to `http://www.onetimesheet.com:4200/ots/`
+Please install `npm install -g @angular/cli` and then do `npm cache clean` after that run `npm install` where it download all dependencies. It asks to run `npm install -g node-gyp@version` and finally run `npm start` and go to `http://www.onetimesheet.com:4200/ots/`
 
 ## Development server
 
