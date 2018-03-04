@@ -38,3 +38,14 @@ body {
   border-top-left-radius: 0;
   border-top-right-radius: 0;
 }
+
+#tool-tip-bottom{
+  width: 48.5%;
+  margin-left: 155px;
+  margin-top: -48px;	
+}
+
+#sign-in{
+  width: 48.5%;	
+}
+

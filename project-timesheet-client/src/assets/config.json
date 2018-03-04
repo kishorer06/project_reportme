@@ -1,0 +1,4 @@
+{
+  "getUser": "http://www.onetimesheet.com:8080/ots/getUser",
+  "addUser": "http://www.onetimesheet.com:8080/ots/addUser"
+}
