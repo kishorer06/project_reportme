@@ -1,17 +1,14 @@
-import { Configuration } from '../../configuration';
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
+import {ConfigurationService} from '../configuration/configuration.service';
+import {Observable} from 'rxjs/Observable';
 
 @Injectable()
 export class UserService {
-configs;
-   constructor(private _ConfigurationService: Configuration) {
-        console.log('Reading _ConfigurationService');
-         this._ConfigurationService.getConfiguration()
-            .subscribe(
-            (res) => {
-                this.configs = res;
-            },
-            (error) => console.log('error : ' + error),
-        );
-    }
+  api;
+  constructor(private _configService: ConfigurationService) {
+    this.api = _configService;
+  }
+  getUser() {
+    console.log(this.api.configs.getUser);
+  }
 }
