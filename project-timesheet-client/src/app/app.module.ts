@@ -1,17 +1,18 @@
-import {Configuration} from '../assets/configuration';
-import {BrowserModule} from '@angular/platform-browser';
-import {NgModule} from '@angular/core';
-import {HttpModule} from '@angular/http';
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
-import {AppComponent} from './app.component';
+import { BrowserModule } from '@angular/platform-browser';
+import { NgModule } from '@angular/core';
 
-import {ConfigurationService} from './services/configuration/configuration.service';
-import {UserService} from './services/user/user.service';
-import {SignUpComponent} from './sign-up/sign-up.component';
+import { HttpModule } from '@angular/http';
+
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { Configuration } from './configuration';
+import { AppComponent } from './app.component';
+import { UserService } from './services/user/user.service';
+import { SignUpComponent } from './sign-up/sign-up.component';
 
 @NgModule({
   declarations: [
     AppComponent,
+    UserService,
     SignUpComponent
   ],
   imports: [
@@ -19,8 +20,7 @@ import {SignUpComponent} from './sign-up/sign-up.component';
     HttpModule,
     NgbModule.forRoot()
   ],
-  providers: [Configuration, UserService, ConfigurationService],
+  providers: [Configuration],
   bootstrap: [AppComponent]
 })
-
-export class AppModule {}
+export class AppModule { }
