@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
-	<property name="LOGS_HOME" value="/Users/kishoreg/timesheet/" />
+	<property name="LOGS_HOME" value="${user.home}/timesheet/" />
 	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
 		<layout class="ch.qos.logback.classic.PatternLayout">
 			<Pattern>
@@ -50,6 +50,27 @@
 			</timeBasedFileNamingAndTriggeringPolicy>
 		</rollingPolicy>
 	</appender>
+	
+	<appender name="FILE-APPLICATION"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>${LOGS_HOME}timesheet_application.log</file>
+		<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+			<Pattern>
+				%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} -
+				%msg%n
+			</Pattern>
+		</encoder>
+
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<!-- rollover daily -->
+			<fileNamePattern>${LOGS_HOME}timesheet_application.%d{yyyy-MM-dd}.%i.log
+			</fileNamePattern>
+			<timeBasedFileNamingAndTriggeringPolicy
+				class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+				<maxFileSize>100MB</maxFileSize>
+			</timeBasedFileNamingAndTriggeringPolicy>
+		</rollingPolicy>
+	</appender>
 
 	<appender name="FILE-AUDIT"
 		class="ch.qos.logback.core.rolling.RollingFileAppender">
@@ -71,15 +92,20 @@
 		</rollingPolicy>
 	</appender>
 
-	<logger name="com.timesheet.webapp" level="debug"
-		additivity="false">
-		<appender-ref ref="FILE-DEBUG" />
+	<logger name="com.timesheet.webapp" level="info" additivity="false">
+		<appender-ref ref="FILE-APPLICATION" />
 		<appender-ref ref="STDOUT" />
 	</logger>
 
-	<logger name="com.timesheet.webapp.controller" level="info"
+	<logger name="com.timesheet.webapp.controller" level="debug"
 		additivity="false">
 		<appender-ref ref="FILE-AUDIT" />
+		<appender-ref ref="STDOUT" />
+	</logger>
+
+	<logger name="com.timesheet.webapp.controller" level="debug"
+		additivity="false">
+		<appender-ref ref="FILE-DEBUG" />
 		<appender-ref ref="STDOUT" />
 	</logger>
 

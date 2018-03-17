@@ -22,36 +22,13 @@ public class Application implements CommandLineRunner {
 		SpringApplication.run(Application.class, args);
 	}
 
-	// TODO : Only for testing need to remove later
+	// TODO : Only for testing! need to remove later
 	@Override
 	public void run(String... arg0) throws Exception {
 		repository.deleteAll();
-
-		// save a couple of Users
 		repository.save(new User("Alice", "Smith", "alice@gmail.com"));
 		repository.save(new User("Bob", "Smith", "smith@gmail.com"));
-
-		// fetch all Users
-		// System.out.println("Users found with findAll():");
-		// System.out.println("-------------------------------");
-		for (User user : repository.findAll()) {
-			// System.out.println(User);
-		}
-		// System.out.println();
 		logger.debug("User found with findByFirstName('Alice'): {}", repository.findByFirstName("Alice"));
-		// fetch an individual User
-		// System.out.println("--------------------------------");
-		// System.out.println(repository.findByFirstName("Alice"));
-
-		// System.out.println("Email found with findByEmail('alice@gmail.com'):");
-		// System.out.println("--------------------------------");
-		// System.out.println(repository.findByEmail("alice@gmail.com"));
-
-		// System.out.println("Users found with findByLastName('Smith'):");
-		// System.out.println("--------------------------------");
-		for (User user : repository.findByLastName("Smith")) {
-			// System.out.println(user);
-		}
 	}
 
 }
