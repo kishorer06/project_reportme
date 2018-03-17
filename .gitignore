@@ -2,6 +2,7 @@ target/
 .mvn/wrapper/maven-wrapper.jar
 bin/
 project_timesheet_BE/bin/
+*.DS_Store
 
 ### STS ###
 .apt_generated
