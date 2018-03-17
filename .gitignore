@@ -25,3 +25,7 @@ nbbuild/
 dist/
 nbdist/
 .nb-gradle/
+
+### FE ###
+/node_modules
+*package-lock.json
