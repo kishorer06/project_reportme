@@ -14,6 +14,7 @@ import com.timesheet.webapp.model.User;
 import com.timesheet.webapp.service.UserRepository;
 
 @RestController
+@RequestMapping(value = "/ots")
 public class UserController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(UserController.class);
