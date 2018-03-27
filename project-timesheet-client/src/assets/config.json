@@ -1,4 +1,5 @@
 {
-  "getUser": "http://www.onetimesheet.com:8080/ots/getUser",
-  "addUser": "http://www.onetimesheet.com:8080/ots/addUser"
+  "logout":"http://www.onetimesheet.com:8080/logout",
+  "login": "http://www.onetimesheet.com:8080/ots/login",
+  "register": "http://www.onetimesheet.com:8080/ots/register"
 }
