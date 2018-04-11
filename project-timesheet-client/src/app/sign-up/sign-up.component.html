@@ -51,10 +51,10 @@
           </td>
         </tr>
       </table>
-      <mat-card-actions>
-        <button routerLink="../sign-in" class="sign-up-button" mat-raised-button color="primary">Back</button>
-        <button mat-raised-button [disabled]="userRegistrationForm.invalid" (click)="register()">Sign-Up</button>
-      </mat-card-actions>
     </form>
+    <mat-card-actions>
+      <button routerLink="../sign-in" class="sign-up-button" mat-raised-button color="primary">Back</button>
+      <button mat-raised-button [disabled]="userRegistrationForm.invalid" (click)="register()">Sign-Up</button>
+    </mat-card-actions>
   </mat-card-content>
 </mat-card>
