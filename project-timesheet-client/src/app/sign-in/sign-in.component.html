@@ -1,27 +1,37 @@
-<div class="container">
-  <div class="card card-container">
-    <!-- <img class="profile-img-card" src="//lh3.googleusercontent.com/-6V8xOA6M7BA/AAAAAAAAAAI/AAAAAAAAAAA/rzlHcD0KYwo/photo.jpg?sz=120" alt="" /> -->
-    <img id="profile-img" class="profile-img-card" src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" />
-    <p id="profile-name" class="profile-name-card"></p>
-
-      <form name="form-signin" (ngSubmit)="f.form.valid && login()" #f="ngForm" novalidate>
-        <div class="alert alert-danger" role="alert" *ngIf="errorMessage">{{errorMessage}}</div>
-      <span id="reauth-email" class="reauth-email"></span>
-      <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !username.valid }">
-        <label for="username">Email:</label>
-        <input type="text" class="form-control" id="username" name="username" pattern="[^ @]*@[^ @]*" [(ngModel)]="user.username" #username="ngModel" required />
-        <div *ngIf="f.submitted && !username.valid" class="help-block">Email is required</div>
-      </div>
-      <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !password.valid }">
-        <label for="password">Password:</label>
-        <input type="password" class="form-control" id="password" name="password" [(ngModel)]="user.password" #password="ngModel" required />
-        <div *ngIf="f.submitted && !password.valid" class="help-block">Password is required</div>
-      </div>
-      <div id="remember" class="checkbox">
-
-      </div>
-      <button class="btn btn-lg btn-primary btn-block btn-signin" type="submit">Sign in</button>
-    </form><!-- /form -->
-      <a [routerLink]="['/sign-up']" class="btn btn-link">Create new Account!</a>
-  </div><!-- /card-container -->
-</div><!-- /container -->
+<mat-card class="login-card">
+  <mat-card-header>
+    <mat-card-title>Log-In</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <form [formGroup]="userSignInForm" class="login-form">
+      <table class="login-full-width" cellspacing="0">
+        <tr>
+          <td>
+            <div formGroupName="emailGroup">
+              <mat-form-field>
+                <input matInput placeholder="Email address" type="email" [(ngModel)]="user.username" name="username" formControlName="email" required>
+                <mat-error>
+                  {{errors.email}}
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <div formGroupName="passwordGroup">
+              <mat-form-field>
+                <input matInput placeholder="Enter your Password" [type]="hide ? 'password' : 'text'" formControlName="password" [(ngModel)]="user.password" name="password" required>
+                <mat-icon style="cursor:pointer" matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
+              </mat-form-field>
+            </div>
+          </td>
+        </tr>
+      </table>
+      <mat-card-actions>
+        <button class="login-button" mat-raised-button color="primary" type="submit" mat-raised-button [disabled]="userSignInForm.invalid" (click)="login()">Login-In</button>
+        <button routerLink="../sign-up" class="sign-up-button" mat-raised-button color="primary">Sign-up</button>
+      </mat-card-actions>
+    </form>
+  </mat-card-content>
+</mat-card>

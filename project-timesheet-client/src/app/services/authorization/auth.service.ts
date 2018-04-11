@@ -1,45 +1,59 @@
 
 import { Injectable } from '@angular/core';
-import { Http, Headers, RequestOptions,Response} from '@angular/http';
-import {User} from '../../model/user';
+import { Http, Headers, RequestOptions, Response } from '@angular/http';
+import { User } from '../../model/user';
 import 'rxjs/add/operator/map';
 import { AppComponent } from '../../app.component';
 import { ConfigurationService } from "../../services/configuration/configuration.service";
+import { Observable } from "rxjs/Observable";
+import { CookieService } from 'ngx-cookie-service';
 
 @Injectable()
 export class AuthService {
   api;
   tokenInfo;
-  constructor(public http: Http, private _configs : ConfigurationService) {
+  constructor(public http: Http, private _configs: ConfigurationService) {
     this.api = _configs;
   }
+  public logIn(user: User): Observable<boolean> {
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json')
+    // creating base64 encoded String from user name and password
+    var base64Credential: string = btoa(user.username + ':' + user.password);
+    headers.append("Authorization", "Basic " + base64Credential);
+    let options = new RequestOptions();
+    options.headers = headers;
 
-  public logIn(user: User){
-    console.log('this.api.login',this.api.configs.login);
-
-      let headers = new Headers();
-      headers.append('Accept', 'application/json')
-      // creating base64 encoded String from user name and password
-      var base64Credential: string = btoa( user.username+ ':' + user.password);
-      headers.append("Authorization", "Basic " + base64Credential);
-
-      let options = new RequestOptions();
-      options.headers=headers;
-
-      return this.http.get(this.api.configs.login ,   options)
-        .map((response: Response) => {
+    return this.http.post(this.api.configs.token, JSON.stringify({ username: user.username, password: user.password }), options)
+      .map((response: Response) => {
         // login successful if there's a jwt token in the response
-        let user = response.json().principal;// the returned user object is a principal object
-        if (user) {
-          // store user details  in local storage to keep user logged in between page refreshes
-          localStorage.setItem('currentUser', JSON.stringify(user));
+        let token = response.json() && response.json().token;
+        if (token) {
+          // store username and jwt token in local storage to keep user logged in between page refreshes
+          localStorage.setItem('ACCESSID', JSON.stringify({username: user.username, TID: token}));
+          // return true to indicate successful login
+          return true;
+        } else {
+          // return false to indicate failed login
+          return false;
         }
-      });
+      }).catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+  }
+
+  getToken(): String {
+    var currentUser = JSON.parse(localStorage.getItem('ACCESSID'));
+    var token = currentUser && currentUser.TID;
+    return token ? token : "";
+  }
+
+  isLoggedIn(): boolean {
+    var token: String = this.getToken();
+    return token && token.length > 0;
   }
 
   logOut(): boolean {
     // remove user from local storage to log user out
-        localStorage.removeItem('currentUser');
-        return true
+    localStorage.removeItem('ACCESSID');
+    return true
   }
 }

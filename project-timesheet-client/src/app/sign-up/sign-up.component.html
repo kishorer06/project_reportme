@@ -1,51 +1,60 @@
-<div class="container">
-  <div class="card card-container">
-    <img id="profile-img" class="profile-img-card" src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" />
-    <p id="profile-name" class="profile-name-card"></p>
-
-    <form name="form" (ngSubmit)="f.form.valid && register()" #f="ngForm" novalidate>
-      <div class="alert alert-danger" role="alert" *ngIf="errorMessage">{{errorMessage}}</div>
-      <span id="reauth-email" class="reauth-email"></span>
-      <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !fullName.valid }">
-        <label for="fullName">Full Name</label>
-        <input type="text" class="form-control" name="fullName" id="fullName" [(ngModel)]="user.fullName" #fullName="ngModel" required />
-        <div *ngIf="f.submitted && !fullName.valid" class="help-block">The full Name is required</div>
-      </div>
-      <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !username.valid }">
-        <label for="username">Email Address</label>
-        <input type="text" class="form-control" name="username" id="username" pattern="[^ @]*@[^ @]*" [(ngModel)]="user.username" #username="ngModel" required />
-        <div *ngIf="f.submitted && !username.valid" class="help-block">
-
-          <div *ngIf="username.errors.required">
-            Email is required.
-          </div>
-          <div *ngIf="username.errors.pattern">
-            A valid email address is required
-          </div>
-
-        </div>
-      </div>
-      <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !password.valid }">
-        <label for="password">Password</label>
-        <input type="password" class="form-control" name="password" id="password"[(ngModel)]="user.password" #password="ngModel" required minlength="4" />
-        <div *ngIf="f.submitted && !password.valid" class="help-block">
-
-          <div *ngIf="password.errors.required">
-            password is required.
-          </div>
-          <div *ngIf="password.errors.minlength">
-            password must be at least 4 characters long.
-          </div>
-
-        </div>
-      </div>
-      <div id="remember" class="checkbox">
-
-      </div>
-      <button class="btn btn-lg btn-primary btn-block btn-signin" type="submit">Create Account</button>
-      <button [routerLink]="['/login']" class="btn btn-lg btn-danger btn-block btn-cancel" type="button">Cancel</button>
-
-    </form><!-- /form -->
-
-  </div><!-- /card-container -->
-</div><!-- /container -->
+<mat-card class="signup-card">
+  <mat-card-header>
+    <mat-card-title>Create Account</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <form [formGroup]="userRegistrationForm" class="signup-form">
+      <table class="signup-full-width" cellspacing="0">
+        <tr>
+          <td>
+            <mat-form-field>
+              <input matInput placeholder="Enter your Fullname" [(ngModel)]="user.fullName" formControlName="fullName" name="fullName" required>
+            </mat-form-field>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <div formGroupName="emailGroup">
+              <mat-form-field>
+                <input matInput placeholder="Email address" type="email" [(ngModel)]="user.username" name="username" formControlName="email">
+                <mat-error>
+                  {{errors.email}}
+                </mat-error>
+              </mat-form-field>
+              <mat-form-field>
+                <input matInput placeholder="Confirm email address" type="email" formControlName="confirmEmail" [errorStateMatcher]="confirmValidParentMatcher">
+                <mat-error>
+                  {{errors.confirmEmail}}
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <div formGroupName="passwordGroup">
+              <mat-form-field>
+                <input matInput placeholder="Password" [type]="hide ? 'password' : 'text'" [(ngModel)]="user.password" name="password" formControlName="password">
+                <mat-icon style="cursor:pointer" matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
+                <mat-error>
+                  {{errors.password}}
+                </mat-error>
+              </mat-form-field>
+              <mat-form-field>
+                <input matInput placeholder="Confirm password" [type]="hide ? 'password' : 'text'" formControlName="confirmPassword" [errorStateMatcher]="confirmValidParentMatcher">
+                <mat-icon style="cursor:pointer" matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
+                <mat-error>
+                  {{errors.confirmPassword}}
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </td>
+        </tr>
+      </table>
+      <mat-card-actions>
+        <button routerLink="../sign-in" class="sign-up-button" mat-raised-button color="primary">Back</button>
+        <button mat-raised-button [disabled]="userRegistrationForm.invalid" (click)="register()">Sign-Up</button>
+      </mat-card-actions>
+    </form>
+  </mat-card-content>
+</mat-card>

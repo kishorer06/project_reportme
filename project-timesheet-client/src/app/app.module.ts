@@ -4,8 +4,7 @@ import {NgModule} from '@angular/core';
 import {HttpModule} from '@angular/http';
 import { HttpClientModule, HTTP_INTERCEPTORS, HttpClientXsrfModule } from '@angular/common/http';
 import { RouterModule, Routes } from '@angular/router';
-import { FormsModule } from '@angular/forms';
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {AppComponent} from './app.component';
 
 import {ConfigurationService} from './services/configuration/configuration.service';
@@ -15,6 +14,8 @@ import {SignUpComponent} from './sign-up/sign-up.component';
 import {SignInComponent} from './sign-in/sign-in.component';
 import {WelcomeComponent} from './welcome/welcome.component';
 import {UrlAccessService} from './services/permission/urlaccess.service';
+import { CustomMaterialModule } from './material-module';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 const routes: Routes = [
   { path: 'welcome', component: WelcomeComponent, canActivate: [UrlAccessService]},
@@ -35,9 +36,10 @@ const routes: Routes = [
     HttpModule,
     HttpClientModule,
     HttpClientModule,
-    HttpClientXsrfModule,
+    CustomMaterialModule,
+    BrowserAnimationsModule,
     FormsModule,
-    NgbModule.forRoot(),
+    ReactiveFormsModule,
     RouterModule.forRoot(routes),
   ],
   providers: [Configuration, UserService, AuthService, UrlAccessService, ConfigurationService],

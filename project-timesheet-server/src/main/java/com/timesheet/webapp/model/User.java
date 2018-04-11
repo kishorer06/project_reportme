@@ -12,11 +12,14 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonProperty.Access;
 
 @Document(collection = "user")
 @Scope("session")
+@JsonInclude(Include.NON_EMPTY)
 public  class User implements UserDetails{
 	
 	private static final long serialVersionUID = 5784597814237053923L;
@@ -45,6 +48,11 @@ public  class User implements UserDetails{
 	 * Description of the property full name.
 	 */
     private String fullName;
+    
+    /**
+     * 
+     */
+    private boolean isEmailVerified;
 
     public User(){
     	
@@ -133,4 +141,13 @@ public  class User implements UserDetails{
 	public String getId() {
 		return id;
 	}
+
+	public boolean isEmailVerified() {
+		return isEmailVerified;
+	}
+
+	public void setEmailVerified(boolean isEmailVerified) {
+		this.isEmailVerified = isEmailVerified;
+	}
+	
 }
