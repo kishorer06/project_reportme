@@ -1,6 +1,6 @@
-.signup-card {
+.login-card {
   max-width: 400px;
-  margin: 10em auto;
+  margin: 15em auto;
   text-align: center;
 }
 
@@ -12,6 +12,6 @@
   width: 100%;
 }
 
-.signup-full-width {
+.login-full-width {
   width: 100%;
 }

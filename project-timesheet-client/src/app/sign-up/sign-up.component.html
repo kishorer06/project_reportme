@@ -1,3 +1,60 @@
-<p>
-  sign-up works!
-</p>
+<mat-card class="signup-card">
+  <mat-card-header>
+    <mat-card-title>Create Account</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <form [formGroup]="userRegistrationForm" class="signup-form">
+      <table class="signup-full-width" cellspacing="0">
+        <tr>
+          <td>
+            <mat-form-field>
+              <input matInput placeholder="Enter your Fullname" [(ngModel)]="user.fullName" formControlName="fullName" name="fullName" required>
+            </mat-form-field>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <div formGroupName="emailGroup">
+              <mat-form-field>
+                <input matInput placeholder="Email address" type="email" [(ngModel)]="user.username" name="username" formControlName="email">
+                <mat-error>
+                  {{errors.email}}
+                </mat-error>
+              </mat-form-field>
+              <mat-form-field>
+                <input matInput placeholder="Confirm email address" type="email" formControlName="confirmEmail" [errorStateMatcher]="confirmValidParentMatcher">
+                <mat-error>
+                  {{errors.confirmEmail}}
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <div formGroupName="passwordGroup">
+              <mat-form-field>
+                <input matInput placeholder="Password" [type]="hide ? 'password' : 'text'" [(ngModel)]="user.password" name="password" formControlName="password">
+                <mat-icon style="cursor:pointer" matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
+                <mat-error>
+                  {{errors.password}}
+                </mat-error>
+              </mat-form-field>
+              <mat-form-field>
+                <input matInput placeholder="Confirm password" [type]="hide ? 'password' : 'text'" formControlName="confirmPassword" [errorStateMatcher]="confirmValidParentMatcher">
+                <mat-icon style="cursor:pointer" matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
+                <mat-error>
+                  {{errors.confirmPassword}}
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </td>
+        </tr>
+      </table>
+      <mat-card-actions>
+        <button routerLink="../sign-in" class="sign-up-button" mat-raised-button color="primary">Back</button>
+        <button mat-raised-button [disabled]="userRegistrationForm.invalid" (click)="register()">Sign-Up</button>
+      </mat-card-actions>
+    </form>
+  </mat-card-content>
+</mat-card>
