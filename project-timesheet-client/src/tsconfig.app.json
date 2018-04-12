@@ -6,9 +6,8 @@
     "baseUrl": "",
     "types": [
       "jquery",
-      "bootstrap",
       "node"
-      ]   
+      ]
   },
   "exclude": [
     "test.ts",
