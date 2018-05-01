@@ -9,21 +9,3 @@ html, body {
   height: 100%;
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
-
-.wrapper {
-  min-height: 100%;
-  height: auto !important;
-  height: 100%;
-  margin: 0 auto -4em;
-}
-
-.footer, .push {
-  height: 64px;
-  background: rgba(0, 0, 0, .87);
-  color: #fff;
-}
-
-.footer.copy-right, p {
-  text-align: center;
-  padding-top: 25px;
-}
