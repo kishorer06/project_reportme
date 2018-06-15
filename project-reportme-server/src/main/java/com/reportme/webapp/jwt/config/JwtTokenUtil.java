@@ -53,7 +53,7 @@ public class JwtTokenUtil implements Serializable {
 		Claims claims = Jwts.claims().setSubject(subject);
 		claims.put("scopes", Arrays.asList(new SimpleGrantedAuthority("ROLE_ADMIN")));
 		String id = UUID.randomUUID().toString().replace("-", "");
-		return Jwts.builder().setClaims(claims).setIssuer("http://www.onetimesheet.com")
+		return Jwts.builder().setClaims(claims).setIssuer("http://www.report-me.com")
 				.setId(id)
 				.setIssuedAt(new Date(System.currentTimeMillis()))
 				.setExpiration(new Date(System.currentTimeMillis() + JwtConstants.ACCESS_TOKEN_VALIDITY_SECONDS * 1000))
