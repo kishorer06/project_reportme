@@ -6,7 +6,6 @@ import { AuthService } from '../services/auth.service';
 export class UrlAccessService implements CanActivate {
 
   constructor(private router: Router, private authService: AuthService) { }
-  activeUser;
   canActivate(_route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
     if (this.authService.isLoggedIn()) {
       // logged in so return true
@@ -14,7 +13,7 @@ export class UrlAccessService implements CanActivate {
     }
 
     // not logged in so redirect to login page with the return url
-    this.router.navigate(['/sign-in'], { queryParams: { returnUrl: state.url } });
+    this.router.navigate(['/login'], { queryParams: { returnUrl: state.url } });
     return false;
   }
 }
