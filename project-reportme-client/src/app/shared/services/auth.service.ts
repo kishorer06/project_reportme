@@ -51,31 +51,9 @@ export class AuthService {
   isLoggedIn() {
     var token: String = this.getToken();
     if (token && token.length > 0)
-      return this.isValidToken(token);
+      return true;
     else
       return false;
-  }
-
-  isValidToken(_token: String) {
-    let headers = new Headers();
-    headers.append('Content-Type', 'application/json')
-    // creating base64 encoded String from user name and password
-    var base64Credential: String = _token;
-    headers.append("Authorization", "Bearer " + base64Credential);
-    let options = new RequestOptions();
-    options.headers = headers;
-    return this.http.get(this.apiUrl + ApiConstants.getUser + '?email=' + this.getUsername(), options)
-      .subscribe((response: Response) => {
-        // login successful if there's a jwt token in the response
-        let _isValidStatus = response.status;
-        if (_isValidStatus == 200) {
-          // return true to indicate successfully token validated
-          return true;
-        } else {
-          // return false to indicate invalid token
-          return false;
-        }
-      });
   }
 
 }

@@ -5,6 +5,7 @@
       <h1>Report-Me</h1>
       <form [formGroup]="signUpForm">
         <div class="form-content">
+          <ngb-alert *ngIf="errorMessage" type="danger" (close)="errorMessage = null">{{ errorMessage }}</ngb-alert>
           <div class="form-group">
             <input type="text" class="form-control input-underline input-lg" [(ngModel)]="user.fullName" name="fullName" formControlName="fullName" id="fullName" placeholder="Full Name" required>
           </div>
@@ -19,7 +20,7 @@
             <div class="alert alert-danger" *ngIf="signUpForm.controls.confirmPassword.errors?.MatchPassword">Password not match</div>
           </div>
         </div>
-        <button class="btn rounded-btn" [routerLink]="['/dashboard']" [disabled]="!signUpForm.valid" (click)="register()"> Register </button>&nbsp;
+        <button class="btn rounded-btn" [disabled]="!signUpForm.valid" (click)="register()"> Register </button>&nbsp;
         <button class="btn rounded-btn" [routerLink]="['/login']"> Log in </button>
       </form>
     </div>

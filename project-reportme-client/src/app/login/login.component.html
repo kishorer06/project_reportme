@@ -5,9 +5,7 @@
       <h1>Report-Me</h1>
       <form [formGroup]="loginForm">
         <div class="form-content">
-          <p *ngFor="let alert of alerts">
-            <ngb-alert [type]="alert.type" (close)="closeAlert(alert)">{{ alert.message }}</ngb-alert>
-          </p>
+          <ngb-alert *ngIf="errorMessage" type="danger" (close)="errorMessage = null">{{ errorMessage }}</ngb-alert>
           <div class="form-group">
             <input type="text" class="form-control input-underline input-lg" [(ngModel)]="user.username" name="username" formControlName="username" id="email" placeholder="Email" required>
           </div>

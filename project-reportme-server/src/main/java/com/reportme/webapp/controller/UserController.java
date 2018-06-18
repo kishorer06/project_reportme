@@ -37,7 +37,7 @@ public class UserController {
 		if (userService.find(newUser.getUsername()) != null) {
 			System.out.println("request received");
 			logger.error("Email already exists " + newUser.getUsername());
-			return new ResponseEntity(new CustomErrorType("Email already exists!"), HttpStatus.CONFLICT);
+			return new ResponseEntity(new CustomErrorType("Account already exists!"), HttpStatus.CONFLICT);
 		}
 		newUser.setRole("USER");
 		newUser.setPassword(passwordEncoder.encode(newUser.getPassword()));

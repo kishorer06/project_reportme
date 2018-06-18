@@ -4,7 +4,7 @@
     "license": "MIT",
     "scripts": {
         "ng": "ng",
-        "start": "ng serve --host www.report-me.com --ec true --port 3000",
+        "start": "ng serve --host www.report-me.com --ec true --port 3000 --open",
         "build": "ng build --prod",
         "test": "ng test",
         "lint": "ng lint",
