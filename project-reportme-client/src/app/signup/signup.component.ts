@@ -45,10 +45,9 @@ export class SignupComponent implements OnInit {
   register() {
     this.user.role = "USER";
     this.userService.createAccount(this.user).subscribe(_data => {
-      // this.router.navigate(['/login']);
+      this.router.navigate(['/login']);
     }, err => {
-      let error = JSON.parse(err._body);
-      this._error.next(error.errorMessage);
+      this._error.next(err.error.errorMessage);
     }
     )
   }
