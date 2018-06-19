@@ -18,7 +18,7 @@ import com.reportme.webapp.service.UserService;
 import com.reportme.webapp.util.CustomErrorType;
 
 @RestController
-@RequestMapping("ots")
+@RequestMapping("rm")
 public class UserController {
 
 	public static final Logger logger = LoggerFactory.getLogger(UserController.class);

@@ -18,7 +18,7 @@ import com.reportme.webapp.model.User;
 import com.reportme.webapp.service.UserService;
 
 @RestController
-@RequestMapping("ots")
+@RequestMapping("rm")
 public class AuthenticationController {
 
     @Autowired
