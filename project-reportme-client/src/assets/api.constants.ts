@@ -1,6 +1,5 @@
 export const ApiConstants = {
-  token: 'ots/token',
-  register: 'ots/register',
-  getUser: 'ots/getUser',
-  verifyToken: 'ots/verifyToken'
+  token: 'rm/token',
+  register: 'rm/register',
+  getUser: 'rm/getUser'
 };
