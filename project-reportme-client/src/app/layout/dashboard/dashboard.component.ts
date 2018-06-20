@@ -61,15 +61,4 @@ export class DashboardComponent implements OnInit {
     this.alerts.splice(index, 1);
   }
 
-  public getUsers() {
-    this.userService.getUserInfo("kishorer666@gmail.com").subscribe(res => {
-      console.log(res);
-
-    }, (err: HttpErrorResponse) => {
-      console.log(err.error);
-      console.log(err.name);
-      console.log(err.message);
-      console.log(err.status);
-    });
-  }
 }
