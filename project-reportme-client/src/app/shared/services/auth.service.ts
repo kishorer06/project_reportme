@@ -43,6 +43,10 @@ export class AuthService {
     return token ? token : "";
   }
 
+  deleteToken() {
+    localStorage.removeItem('ACCESSID');
+  }
+
   getUsername(): String {
     var currentUser = JSON.parse(localStorage.getItem('ACCESSID'));
     var username = currentUser && currentUser.username;

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { routerTransition } from '../../router.animations';
+import { UserService } from 'app/shared';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-dashboard',
@@ -11,7 +13,7 @@ export class DashboardComponent implements OnInit {
   public alerts: Array<any> = [];
   public sliders: Array<any> = [];
 
-  constructor() {
+  constructor(private userService: UserService) {
     this.sliders.push(
       {
         imagePath: 'assets/images/slider1.jpg',
@@ -57,5 +59,17 @@ export class DashboardComponent implements OnInit {
   public closeAlert(alert: any) {
     const index: number = this.alerts.indexOf(alert);
     this.alerts.splice(index, 1);
+  }
+
+  public getUsers() {
+    this.userService.getUserInfo("kishorer666@gmail.com").subscribe(res => {
+      console.log(res);
+
+    }, (err: HttpErrorResponse) => {
+      console.log(err.error);
+      console.log(err.name);
+      console.log(err.message);
+      console.log(err.status);
+    });
   }
 }

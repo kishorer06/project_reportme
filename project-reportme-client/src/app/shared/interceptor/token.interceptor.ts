@@ -1,17 +1,19 @@
 import { Location } from '@angular/common';
 import { Injectable } from '@angular/core';
-import { HttpInterceptor } from '@angular/common/http';
+import { HttpInterceptor, HttpErrorResponse } from '@angular/common/http';
 import { HttpRequest } from '@angular/common/http';
 import { HttpHandler } from '@angular/common/http';
 import { HttpEvent } from '@angular/common/http';
 import { HttpHeaders } from '@angular/common/http';
 import 'rxjs/add/observable/fromPromise';
+import 'rxjs/add/operator/do';
 import { Observable } from 'rxjs/Observable';
 import { AuthService } from 'app/shared';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class TokenInterceptor implements HttpInterceptor {
-  constructor(private authService: AuthService) { }
+  constructor(private router: Router, private authService: AuthService) { }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     return Observable.fromPromise(this.handleAccess(request, next));
@@ -36,7 +38,15 @@ export class TokenInterceptor implements HttpInterceptor {
     changedRequest = request.clone({
       headers: newHeader
     });
-    return next.handle(changedRequest).toPromise();
+    return next.handle(changedRequest).do((event: HttpEvent<any>) => null, (error: any) => {
+      if (error instanceof HttpErrorResponse)
+        if (error.status === 401 || error.status === 403) {
+          // remove the expired token
+          this.authService.deleteToken();
+          /* redirect to login, username/password do not match anymore */
+          this.router.navigate(['/login']);
+        }
+    }).toPromise();
   }
 
 }

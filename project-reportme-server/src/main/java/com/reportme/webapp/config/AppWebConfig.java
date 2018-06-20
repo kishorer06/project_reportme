@@ -79,7 +79,6 @@ public class AppWebConfig extends WebSecurityConfigurerAdapter {
 				 * "/logout" will log the user out by invalidating the HTTP Session, cleaning up
 				 * any {link rememberMe()} authentication that was configured,
 				 */
-				.logout().permitAll().and()
 				// enabling the basic authentication
 				.httpBasic().and()
 				// configuring the session on the server
