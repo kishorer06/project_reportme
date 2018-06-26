@@ -63,10 +63,13 @@ export class DashboardComponent implements OnInit {
 
   public getUsers() {
     this.userService.getUserInfo("kishorer666@gmail.com").subscribe(res => {
-      console.log('Get Users', res);
+      console.log(res);
+
     }, (err: HttpErrorResponse) => {
-      console.log(err);
+      console.log(err.error);
+      console.log(err.name);
+      console.log(err.message);
+      console.log(err.status);
     });
   }
-
 }
